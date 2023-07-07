@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { NavBar } from '../nav/NavBar'
 
-export const Authorized = ({ children }) => {
+export const Authorized = () => {
     const location = useLocation()
 
     if (localStorage.getItem('todo_user')){
@@ -9,7 +9,7 @@ export const Authorized = ({ children }) => {
             <div className='shell'>
                 <div className='shell-top'>
                     <div className='shell-left'>
-                        <NavBar>{children}</NavBar>
+                        <NavBar></NavBar>
                     </div>
                 </div>
                 <div className='shell-bottom'>
