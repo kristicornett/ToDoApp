@@ -5,11 +5,12 @@ export const Authorized = () => {
     const location = useLocation()
 
     if (localStorage.getItem('todo_user')){
+        const userToken = JSON.parse(localStorage.getItem('todo_user'))
         return <>
             <div className='shell'>
                 <div className='shell-top'>
                     <div className='shell-left'>
-                        <NavBar></NavBar>
+                        <NavBar userData={userToken}></NavBar>
                     </div>
                 </div>
                 <div className='shell-bottom'>
