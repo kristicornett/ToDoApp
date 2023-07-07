@@ -4,7 +4,7 @@ export const NavBar = () => {
     const navigate = useNavigate()
 
     return (
-        <ul className='navbar'>
+        <ul className='navbar' style={{listStyle: 'none'}}>
             <li className='navbar__item active'>
                 <Link className='navbar__link' to='/completed'>Completed Tasks</Link>
             </li>
