@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { registerUser } from '../managers/AuthManager';
 import { useRef, useState, useEffect } from 'react'
+import { createNewUser } from '../managers/UserManager';
 
 
 
@@ -30,17 +31,17 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export const Register = ({ setToken }) => {
+export const Register = () => {
   const name = useRef();
   const email = useRef();
+  const user = useRef()
   const password = useRef();
   const verifyPassword = useRef();
   const passwordDialog = useRef()
   const navigate = useNavigate();
 
 
-
-const handleRegister = (event) => {
+  const handleRegister = (event) => {
     event.preventDefault();
 
     if (password.current.value === verifyPassword.current.value) {
@@ -50,9 +51,9 @@ const handleRegister = (event) => {
         password: password.current.value,
       };
 
-      registerUser(newUser).then((response) => {
-        if (response.token) {
-          setToken('')
+      createNewUser(newUser).then((response) => {
+        if (response) {
+          
           navigate("/");
         }
       });

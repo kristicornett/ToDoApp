@@ -1,4 +1,4 @@
-const url = 'http://localhost:8088/'
+const url = 'http://localhost:8088'
 
 export const createNewUser = (user) => {
     return fetch(`${url}/users`, {

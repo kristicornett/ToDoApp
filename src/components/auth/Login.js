@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../managers/AuthManager';
+import { getUserByEmail } from '../managers/UserManager';
 import { useRef, useState } from 'react'
 
 function Copyright(props) {
@@ -33,28 +33,29 @@ const defaultTheme = createTheme();
 
 export const Login = ({ setToken }) => {
     const username = useRef()
+    const email = useRef()
     const password = useRef()
     const navigate = useNavigate()
     const [isUnsuccessful, setisUnsucessful] = useState(false)
     
-const handleLogin = (event) => {
-    event.preventDefault()
+    const handleLogin = (event) => {
+        event.preventDefault()
 
-    const user = {
-        username: username.current.value,
-        password: password.current.value
-    }
+        return getUserByEmail(email.current.value)
+        .then(foundUsers => {
+            if (foundUsers.length === 1){
+                const user = foundUsers[0]
+                localStorage.setItem('todo_user', JSON.stringify({
+                    email: user.email,
+                    password: user.password
 
-    loginUser(user)
-    .then(response => {
-        if ('valid' in response && response.valid) {
-            setToken(response.token, JSON.stringify(response.user))
-            navigate('/')
-        }
-        else {
-            setisUnsucessful(true)
-        }
-    })
+                }))
+
+                navigate('/')
+            } else {
+                setisUnsucessful(true)
+            }
+        })
 }
 
   return (
@@ -85,7 +86,7 @@ const handleLogin = (event) => {
               name="email"
               autoComplete="email"
               autoFocus
-              inputRef={username}
+              inputRef={email}
             />
             <TextField
               margin="normal"

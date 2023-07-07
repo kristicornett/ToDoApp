@@ -9,7 +9,7 @@ export const loginUser = (user) => {
 
         },
         body: JSON.stringify({
-            username: user.username,
+            email: user.username,
             password: user.password
         })
     }).then(response => response.json())
