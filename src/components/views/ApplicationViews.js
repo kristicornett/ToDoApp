@@ -11,7 +11,7 @@ export const ApplicationViews = () => {
             <Route path='/register' element={<Register /> } />
             <Route element={<Authorized />} >
                 <Route path="/" element={<Home></Home>} />
-                <Route path='/completed' element={<></>} />
+             
             </Route>
         </Routes>
     )

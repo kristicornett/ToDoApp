@@ -27,6 +27,13 @@ export const Home = () => {
                 return todo
             })
         })
+    }
+
+    const deleteToDo = (id) => {
+        setToDo(currentToDo => {
+            return currentToDo.filter(todo => todo.id !== id)
+        })
+    }
 
     return <>
     <h1 className='header'>To Do List</h1>
@@ -38,6 +45,7 @@ export const Home = () => {
             <button className='btn'>Add</button>
         </form>
         <ul className='list' style={{listStyle: 'none'}}>
+            {toDo.length === 0 && 'No To Do Items'}
             {
                 toDo.map(t => {
                     return  <li key={t.id}>
@@ -46,6 +54,7 @@ export const Home = () => {
                         onChange={(evt => toggleToDo(toDo.id, evt.target.checked))}/>
                         {t.title}
                     </label>
+                    <button onClick={() => deleteToDo(t.id)} className='btn btn-danger'>Delete</button>
                 </li>
                 })
             }
